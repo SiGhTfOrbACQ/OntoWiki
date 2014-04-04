@@ -192,8 +192,9 @@ class OntoWiki_Model_Instances extends OntoWiki_Model
             ->addProjectionVar($this->_resourceVar)
             ->setDistinct(true);
 
-        //always query for type
-        $this->addShownProperty(EF_RDF_TYPE, '__TYPE');
+        if($this->_config->lists->showTypeColumnByDefault === "true") {
+           $this->addShownProperty(EF_RDF_TYPE, '__TYPE');
+        }
 
         //set froms to the requested graph
         $this->_valueQuery->addFrom((string)$model);
